@@ -1,0 +1,25 @@
+{
+    "name"      : "ColdBox Stripe Module",
+    "author"    : "Ortus Solutions <info@ortussolutions.com",
+    "location"  : "http://downloads.ortussolutions.com.s3.amazonaws.com/ortussolutions/coldbox-modules/cbstripe/@build.version@/cbstripe-@build.version@.zip",
+    "version"   : "@build.version@+@build.number@",
+    "slug"      : "cbstripe",
+    "type"      : "modules",
+    "homepage"  : "https://github.com/coldbox-modules/cbox-stripe",
+    "bugs"      : "https://github.com/coldbox-modules/cbox-stripe/issues",
+    "documentation"     : "https://github.com/coldbox-modules/cbox-stripe",
+    "repository"        : { "type" : "git", "url" : "https://github.com/coldbox-modules/cbox-stripe" },
+    "shortDescription"  : "Provides you with integration to Stripe for payments and subscriptions.",
+    "license"           : [ 
+        { "type" : "Apache2", "url" : "http://www.apache.org/licenses/LICENSE-2.0.html" } 
+    ],
+    "contributors"      : [
+    ],
+    "dependencies"  :{
+    },
+    "ignore":[
+        "**/.*",
+        "tests",
+        "*/.md"
+    ]
+}
