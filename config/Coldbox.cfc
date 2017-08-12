@@ -43,6 +43,14 @@ component{
 			proxyReturnCollection 	= false
 		};
 
+		var system = createObject( "java", "java.lang.System" );
+		moduleSettings = {
+			"cbstripe" = {
+				"secretKey" = system.getProperty( "STRIPE_SECRET_KEY" ),
+				"publishableKey" = "something else"
+			}
+		};
+
 		// custom settings
 		settings = {
 		};
