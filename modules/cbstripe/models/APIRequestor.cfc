@@ -30,6 +30,8 @@ component {
             "Authorization" = "Bearer #secretKey#"
         } );
 
+        writeDump( urlUtil.join( STRIPE_BASE_URL, STRIPE_API_VERSION, endpoint ) );
+
         cfhttp(
             url          = urlUtil.join( STRIPE_BASE_URL, STRIPE_API_VERSION, endpoint ),
             result       = "local.result",
@@ -45,6 +47,8 @@ component {
                 );
             }
         };
+
+        // writeDump( local.result );
 
         return populator.populateFromStruct(
             wirebox.getInstance( "APIResponse@cbstripe" ), {
