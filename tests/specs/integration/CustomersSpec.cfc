@@ -31,14 +31,28 @@ component extends="tests.resources.BaseStripeSpec" {
             } );
 
             describe( "create", function() {
-                it( "can create a new customer", function() {
+                it( "can create a new blank customer", function() {
                     var customerService = getInstance( "CustomerService@cbstripe" );
                     var customer = customerService.create( getInstance( "Customer@cbstripe" ) );
                     expect( customer.getId() ).notToBeNull();
                 } );
 
-                xit( "can create a new customer from a struct of data", function() {
-                    fail( "test not implemented yet" );
+                it( "can create a customer with passed in data", function() {
+                    var customerService = getInstance( "CustomerService@cbstripe" );
+                    var newCustomer = getInstance( "Customer@cbstripe" );
+                    newCustomer.setEmail( "john@example.com" );
+                    var customer = customerService.create( newCustomer );
+                    expect( customer.getId() ).notToBeNull();
+                    expect( customer.getEmail() ).toBe( "john@example.com" );
+                } );
+
+                it( "can create a new customer from a struct of data", function() {
+                    var customerService = getInstance( "CustomerService@cbstripe" );
+                    var customer = customerService.create( {
+                        "email" = "john@example.com"
+                    } );
+                    expect( customer.getId() ).notToBeNull();
+                    expect( customer.getEmail() ).toBe( "john@example.com" );
                 } );
             } );
 

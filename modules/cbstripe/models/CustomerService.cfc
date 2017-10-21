@@ -21,10 +21,7 @@ component singleton {
         paginator.setDefaultParams( arguments.params );
         paginator.setData(
             res.getData().data.map( function( customer ) {
-                return populator.populateFromStruct(
-                    wirebox.getInstance( "Customer@cbstripe" ),
-                    customer
-                );
+                return wirebox.getInstance( "Customer@cbstripe" ).populate( customer );
             } )
         );
         return paginator;
@@ -39,11 +36,15 @@ component singleton {
     }
 
     function create( customer ) {
+        if ( ! isObject( customer ) ) {
+            customer = wirebox.getInstance( "Customer@cbstripe" ).populate( customer );
+        }
         var res = APIRequestor.request(
             endpoint = "customers",
             method   = "POST",
-            body     = customer.getMemento()
+            fields   = customer.getMemento()
         );
+        // writeDump( var = res, top = 2, abort = true );
         return populator.populateFromStruct(
             customer,
             res.getData()
