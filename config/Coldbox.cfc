@@ -1,5 +1,20 @@
 component{
 
+	function getSystemSetting( key, defaultValue ) {
+		var env = system.getEnv();
+		if ( structKeyExists( env, key ) ) {
+			return env[ key ];
+		}
+		var props = system.getProperties();
+		if ( structKeyExists( props, key ) ) {
+			return props[ key ];
+		}
+		if ( ! isNull( defaultValue ) ) {
+			return defaultValue;
+		}
+		throw( "No env or system property named [#key#] was found." );
+	}
+
 	// Configure ColdBox Application
 	function configure(){
 
@@ -43,10 +58,9 @@ component{
 			proxyReturnCollection 	= false
 		};
 
-		var system = createObject( "java", "java.lang.System" );
 		moduleSettings = {
 			"cbstripe" = {
-				"secretKey" = system.getProperty( "STRIPE_SECRET_KEY" ),
+				"secretKey" = getSystemSetting( "STRIPE_SECRET_KEY" ),
 				"publishableKey" = "something else"
 			}
 		};
