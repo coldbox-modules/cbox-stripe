@@ -6,7 +6,8 @@
     "defaultPort":0,
     "dependencies":{
         "coldbox":"^4.3.0",
-        "workbench":"git+https://github.com/Ortus-Solutions/unified-workbench.git"
+        "workbench":"git+https://github.com/Ortus-Solutions/unified-workbench.git",
+        "str":"^1.0.0"
     },
     "devDependencies":{
         "testbox":"2.5.0"
@@ -14,7 +15,8 @@
     "installPaths":{
         "testbox":"testbox",
         "coldbox":"coldbox",
-        "workbench":"workbench"
+        "workbench":"workbench",
+        "str":"modules/str"
     },
     "testbox":{
         "runner":"http://localhost:49616"
