@@ -7,9 +7,8 @@ component extends="coldbox.system.testing.BaseTestCase" {
 
                 // this property is defaulted in `modules/cbstripe/ModuleConfig.cfc`
                 // and overridden in `config/ColdBox.cfc`
-                expect( requestor.$getProperty( "secretKey" ) ).toBe(
-                    createObject( "java", "java.lang.System" ).getProperty( "STRIPE_SECRET_KEY" )
-                );
+                expect( requestor.$getProperty( "secretKey" ) )
+                    .toBe( getSystemSetting( "STRIPE_SECRET_KEY" ) );
             } );
 
             it( "does not expose the secret key through a getter", function() {
@@ -25,6 +24,22 @@ component extends="coldbox.system.testing.BaseTestCase" {
                 expect( res.getData().object ).toBe( "balance" );
             } );
         } );
+    }
+
+    function getSystemSetting( key, defaultValue ) {
+        var system = createObject( "java", "java.lang.System" );
+        var env = system.getEnv();
+        if ( structKeyExists( env, key ) ) {
+            return env[ key ];
+        }
+        var props = system.getProperties();
+        if ( structKeyExists( props, key ) ) {
+            return props[ key ];
+        }
+        if ( ! isNull( defaultValue ) ) {
+            return defaultValue;
+        }
+        throw( "No env or system property named [#key#] was found." );
     }
 
 }
