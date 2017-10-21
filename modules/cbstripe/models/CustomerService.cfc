@@ -1,11 +1,20 @@
 component singleton {
 
+    /*============================================
+    =            Dependency Injection            =
+    ============================================*/
+
     property name="APIRequestor" inject="APIRequestor@cbstripe";
-    property name="URLUtil" inject="URLUtil@cbstripe";
+    property name="populator"    inject="wirebox:populator";
+    property name="path"         inject="Path@cbstripe";
+    property name="wirebox"      inject="wirebox";
 
     function find( id ) {
-        var res = APIRequestor.request( URLUtil.join( "customers", id ) );
-        writeDump( var = res, top = 2, abort = true );
+        var res = APIRequestor.request( path.join( "customers", id ) );
+        return populator.populateFromStruct(
+            wirebox.getInstance( "Customer@cbstripe" ),
+            res.getData()
+        );
     }
 
     function create( customer ) {

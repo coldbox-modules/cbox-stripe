@@ -8,8 +8,8 @@ component {
     ============================================*/
 
     property name="populator" inject="wirebox:populator";
-    property name="urlUtil" inject="URLUtil@cbstripe";
-    property name="wirebox" inject="wirebox";
+    property name="path"      inject="Path@cbstripe";
+    property name="wirebox"   inject="wirebox";
 
     /*===================================
     =            Stripe Keys            =
@@ -30,10 +30,10 @@ component {
             "Authorization" = "Bearer #secretKey#"
         } );
 
-        writeDump( urlUtil.join( STRIPE_BASE_URL, STRIPE_API_VERSION, endpoint ) );
+        // writeDump( path.join( STRIPE_BASE_URL, STRIPE_API_VERSION, endpoint ) );
 
         cfhttp(
-            url          = urlUtil.join( STRIPE_BASE_URL, STRIPE_API_VERSION, endpoint ),
+            url          = path.join( STRIPE_BASE_URL, STRIPE_API_VERSION, endpoint ),
             result       = "local.result",
             method       = method,
             throwonerror = true,
