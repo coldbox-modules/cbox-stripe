@@ -1,11 +1,13 @@
-component accessors="true" {
+component extends="cbstripe.models.BaseStripeModel" accessors="true" {
 
     property name="CustomerService"
              inject="CustomerService@cbstripe"
              getter="false"
              setter="false";
 
-    property name="id";
+    property name="id" default="";
+    property name="email" default="";
+    property name="description" default="";
     property name="isDeleted" default="false";
 
     function save() {
@@ -20,7 +22,8 @@ component accessors="true" {
 
     function getMemento() {
         return {
-            "id" = getId()
+            "email" = getEmail(),
+            "description" = getDescription()
         };
     }
 
