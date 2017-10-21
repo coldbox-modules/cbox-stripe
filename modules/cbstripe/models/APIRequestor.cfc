@@ -44,7 +44,6 @@ component {
             url          = path.join( STRIPE_BASE_URL, STRIPE_API_VERSION, endpoint ),
             result       = "local.result",
             method       = method,
-            throwonerror = true,
             timeout      = 10
         ) {
             for ( var name in headers ) {
@@ -79,7 +78,11 @@ component {
             }
         };
 
-        // writeDump( local.result );
+        if ( left( local.result.responseheader.status_code, 1 ) != 2 ) {
+            throw( type = "cbstripe.APIRequestError", message = local.result.filecontent );
+        }
+
+        // writeDump( var = local.result, abort = true );
 
         return populator.populateFromStruct(
             wirebox.getInstance( "APIResponse@cbstripe" ), {
