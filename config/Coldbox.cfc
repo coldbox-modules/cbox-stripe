@@ -1,5 +1,6 @@
 component{
 
+	variables.system = createObject( "java", "java.lang.System" );
 	function getSystemSetting( key, defaultValue ) {
 		var env = system.getEnv();
 		if ( structKeyExists( env, key ) ) {
