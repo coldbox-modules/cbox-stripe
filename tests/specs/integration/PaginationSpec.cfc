@@ -40,7 +40,7 @@ component extends="tests.resources.BaseStripeSpec" {
                 expect( customers.getData() ).toBeArray();
                 expect( customers.getData() ).notToBeEmpty();
                 expect( customers.getData() ).toHaveLength( 1 );
-                expect( customers.getData()[ 1 ] ).toBe( retrievedCustomer );
+                expect( customers.getData()[ 1 ].getId() ).toBe( retrievedCustomer.getId() );
             } );
 
             it( "returns an empty array when there are no records", function() {
