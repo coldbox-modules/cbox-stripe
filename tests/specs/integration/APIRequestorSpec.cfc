@@ -20,7 +20,7 @@ component extends="coldbox.system.testing.BaseTestCase" {
             it( "can make requests to Stripe's api", function() {
                 var requestor = getWireBox().getInstance( "APIRequestor@cbstripe" );
                 var res = requestor.request( "balance" );
-                expect( res ).toBeInstanceOf( "APIResponse" );
+                expect( res ).toBeInstanceOf( "cbstripe.models.APIResponse" );
                 expect( res.getStatusCode() ).toBe( 200 );
                 expect( res.getData().object ).toBe( "balance" );
             } );

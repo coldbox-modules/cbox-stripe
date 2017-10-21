@@ -6,6 +6,7 @@ component accessors="true" {
              setter="false";
 
     property name="id";
+    property name="isDeleted" default="false";
 
     function save() {
         var res = "";
@@ -15,7 +16,6 @@ component accessors="true" {
         else {
             res = CustomerService.update( this );
         }
-        writeDump( var = res, top = 2, abort = true );
     }
 
     function getMemento() {
