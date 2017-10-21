@@ -31,6 +31,7 @@ component {
         method = "GET",
         headers = {},
         params = {},
+        fields = {},
         body = ""
     ) {
         structAppend( headers, {
@@ -59,6 +60,21 @@ component {
                     type  = "url",
                     name  = name,
                     value = params[ name ]
+                );
+            }
+
+            for ( var name in fields ) {
+                cfhttpparam(
+                    type  = "formfield",
+                    name  = name,
+                    value = fields[ name ]
+                );
+            }
+
+            if ( ! isSimpleValue( body ) || len( body ) ) {
+                cfhttpparam(
+                    type = "body",
+                    value = isStruct( body ) ? serializeJSON( body ) : body
                 );
             }
         };
